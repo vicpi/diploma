@@ -1,0 +1,122 @@
+"+":
+    byte:
+        byte: byte
+        word: word
+        integer: integer
+        longint: longint
+        double: double
+        real: real
+    word:
+        byte: word
+        word: word
+        integer: integer
+        longint: longint
+        double: double
+        real: real
+    integer:
+        byte: integer
+        word: integer
+        integer: integer
+        longint: longint
+        double: double
+        real: real
+    longint:
+        byte: longint
+        word: longint
+        integer: longint
+        longint: longint
+        double: double
+        real: real
+"-":
+    byte:
+        byte: byte
+        word: word
+        integer: integer
+        longint: longint
+    word:
+        byte: word
+        word: word
+        integer: integer
+        longint: longint
+    integer:
+        byte: integer
+        word: integer
+        integer: integer
+        longint: longint
+    longint:
+        byte: longint
+        word: longint
+        integer: longint
+        longint: longint
+"*":
+    byte:
+        byte: integer
+        word: longint
+        integer: longint
+        longint: longint
+    word:
+        byte: longint
+        word: longint
+        integer: longint
+        longint: longint
+    integer:
+        byte: longint
+        word: longint
+        integer: longint
+        longint: longint
+    longint:
+        byte: longint
+        word: longint
+        integer: longint
+        longint: longint
+"div":
+    byte:
+        byte: integer
+        word: longint
+        integer: longint
+        longint: longint
+    word:
+        byte: longint
+        word: longint
+        integer: longint
+        longint: longint
+    integer:
+        byte: longint
+        word: longint
+        integer: longint
+        longint: longint
+    longint:
+        byte: longint
+        word: longint
+        integer: longint
+        longint: longint
+"mod":
+    byte:
+        byte: integer
+        word: word
+        integer: integer
+        longint: integer
+    word:
+        byte: byte
+        word: word
+        integer: integer
+        longint: word
+    integer:
+        byte: byte
+        word: word
+        integer: integer
+        longint: longint
+    longint:
+        byte: byte
+        word: word
+        integer: integer
+        longint: longint
+":=":
+    byte: [byte, word, integer, longint, char]
+    word: [byte, word, integer, longint, char]
+    integer: [byte, word, integer, longint, char]
+    longint: [byte, word, integer, longint, char]
+    double: [real, double, integer, byte, word, longint]
+    real: [real, double, integer, byte, word, longint]
+    string: [string]
+    boolean: [boolean]

@@ -1,0 +1,109 @@
+programme:
+    - [program, id, ;, Block, "."]
+Block:
+    - ["[[", types_definition, "]]", "[[", constants_definition, "]]", "[[", vars_definition, "]]", "[[", procedures_and_f_definition, "]]", complex_action]
+types_definition:
+    - [type, type_definition, ;, "#7000", "{", type_definition, ;, "#7000",  "}" ]
+constants_definition:
+     - [const, const_definition, ;, "#4000", "{", const_definition, ;, "#4000", "}"]
+vars_definition:
+    - [var, var_definition, ;, "#6000", "{", var_definition, ;, "#6000", '}']
+procedures_and_f_definition:
+    - ["{", procedure_definition, ;, '}']
+    - ['{', f_definition, ;, "}"]
+type_definition:
+    - [id,  "#8000", "=", _type]
+const_definition:
+    - ["id", "#1000", "=", constant]
+var_definition:
+    - [id_list, ":", _type]
+procedure_definition:
+    - [procedure, "#16", id, "#18", (, formal_list, ), "#23", ;, Block]
+    - [procedure, id, (, formal_list, ), ;, forward]
+f_definition:
+    - [function, "#17", id, "#18", (, formal_list, ), ":", id, "#22", ;, Block]
+    - [function, id, (, formal_list, ), ":", id, ;, forward]
+formal_list:
+    - ["[[", id_list, ":", id, "#21", "{", ;, id_list, ":", id, "#21", "}", "]]"]
+    - ["[[", var, id_list, ":", id, "#21", "{", ;, id_list, ":", id, "#21", "}", "]]"]
+complex_action:
+    - [begin, "#200", action_list, end, "#220"]
+action_list:
+    - [action, "0", "#210", ;, "{", action, ;, "}"]
+action:
+    - [easy_action]
+    - [hard_action]
+easy_action:
+    - ["[[", id, "#30", action1, "]]"]
+action1:
+    - [asnmt]
+    - [procedure_call]
+asnmt:
+    - [ "[[", component_choice, "]]", ":=", expr, "0", "#31"]
+procedure_call:
+    - [(, fact_list, )]
+hard_action:
+    - [complex_action]
+    - [if, "#230", expr, "0", "#240", then, "#250", action, "0", "#260", "[[", else, "#250", action, "0", "#270", "]]"]
+    - [while, "#290", expr, "0", "#300", do, action, "0", "#310,280"]
+    - [for, "#311", id, "#330", ":=", expr, "0", "#340", to, "#350", expr, "0", "#360", do, "#250", action, "0", "#310,280"]
+_type:
+    - [id, "#9000"]
+    - [array, "#15000", "[", index_diapason, "]", "#16000", of, id, "#17000"]
+    - [record, "#18000", field_list, end, "#19000"]
+    - [intConst, "#12000", "..", intConst, "#10000"]
+index_diapason:
+    - [id, "#11000"]
+    - [intConst, "#12000", "..", intConst, "#14000"]
+res_type:
+    - [id]
+field_list:
+    - ["[[", id_list, ":", _type, "{", ;, id_list, ":", _type, "}", "]]"]
+constant:
+    - ["[[", sign, "]]", "intConst", "#2000"]
+    - ["[[", sign, "]]", "StringConst", "#3000"]
+expr:
+    - [easy_expr, "[[", Relation, easy_expr, "0", "#2999", "]]"]
+easy_expr:
+    - ["[[", sign, "]]", add_item, "{", additive, add_item, "0", "#29","}"]
+add_item:
+    - [m_item, "{", Multiplicative, m_item, '0', "#29","}"]
+m_item:
+    - [intConst, "#26"]
+    - [floatConst, "#26"]
+    - [StringConst, "#26"]
+    - [variable]
+    - [f_call]
+    - [not, m_item]
+    - [(, expr, )]
+f_call:
+    - [id, (, fact_list, )]
+variable:
+    - [id, "#26", component_choice]
+component_choice:
+    - ["[[", ., id, component_choice, "]]"]
+    - ["[[", "[", expr, "]", component_choice, "]]"]
+fact_list:
+    - ['[[', expr, "{", ",", expr, "}", "]]"]
+id_list:
+    - [id, "#55000", '{', ",", id, "#5000", "}"]
+sign:
+    - [+]
+    - [-]
+Relation:
+    - ["<", '#2992']
+    - ["<=", '#2992']
+    - [">", '#2992']
+    - [">=", '#2992']
+    - ["<>", '#2992']
+    - ["=", '#2992']
+additive:
+    - ["+", "#28"]
+    - ["-", "#28"]
+    - ["or", "#28"]
+    - ["xor", "#28"]
+Multiplicative:
+    - [div, "#28"]
+    - ["*", "#28"]
+    - [mod, "#28"]
+    - [and, "#28"]
